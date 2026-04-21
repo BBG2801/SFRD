@@ -126,7 +126,7 @@ To get started with SFRD, please follow the steps below:
 1. Clone the repository
 
 ```bash
-git clone <YOUR_REPO_URL>
+git clone https://github.com/BBG2801/SFRD.git
 cd <YOUR_REPO_NAME>
 ```
 
