@@ -22,14 +22,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from SynSet import SFRD
 
 try:
-    from relation_distill import (
-        build_frozen_resnet18_extractor,
+    from SynSet.relation_distill import (
+        FeatureExtractorWrapper,
         InterClassRelationDistillationLoss,
         build_relation_stats,
     )
 except ImportError:
-    from relation_distill import (  # noqa: F401
-        build_frozen_resnet18_extractor,
+    from SynSet.relation_distill import (  # noqa: F401
+        FeatureExtractorWrapper,
         InterClassRelationDistillationLoss,
         build_relation_stats,
     )
@@ -154,11 +154,11 @@ def build_relation_criterion(args, num_classes):
     if not args.use_relation_distill or args.lambda_rel <= 0:
         return None
 
-    frozen_feat = build_frozen_resnet18_extractor(
-        mean=args.mean,
-        std=args.std,
-        resize_to=(224, 224),
-        imagenet_weights=True,
+    relation_backbone = get_network("ConvNetD5", args.channel, num_classes, args.im_size).to(args.device)
+    frozen_feat = FeatureExtractorWrapper(
+        relation_backbone,
+        feature_fn=lambda backbone, x: backbone.embed(x),
+        flatten=True,
     ).to(args.device)
 
     relation_criterion = InterClassRelationDistillationLoss(
