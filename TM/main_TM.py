@@ -25,7 +25,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from SynSet import *
 from SynSet.relation_distill import (
-    build_frozen_resnet18_extractor,
+    FeatureExtractorWrapper,
     InterClassRelationDistillationLoss,
     build_relation_stats,
 )
@@ -204,11 +204,11 @@ def maybe_empty_cache(args):
 
 
 def build_relation_criterion(args):
-    relation_backbone = build_frozen_resnet18_extractor(
-        mean=args.mean,
-        std=args.std,
-        resize_to=(224, 224),
-        imagenet_weights=True,
+    relation_backbone = get_network("ConvNetD5", args.channel, args.num_classes, args.im_size).to(args.device)
+    relation_backbone = FeatureExtractorWrapper(
+        relation_backbone,
+        feature_fn=lambda backbone, x: backbone.embed(x),
+        flatten=True,
     ).to(args.device)
 
     relation_criterion = InterClassRelationDistillationLoss(
