@@ -4,8 +4,8 @@ dst="ImageNet"
 subset="nette"
 res=128
 model="ConvNetD5"
-data_path="/root/autodl-tmp/gitprojects/linear-gradient-matching/data/datasets/imagenet"
-buffer_path="/root/autodl-tmp/gitprojects/DDiF/DDiF/buffers/ImageNet/imagenette_NO_ZCA/ConvNetD5/buffers"
+data_path="${DATA_PATH:-../data/imagenet}"
+buffer_path="${BUFFER_PATH:-./buffers}"
 
 train_epochs=50
 num_experts=100

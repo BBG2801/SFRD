@@ -12,9 +12,9 @@ ipc=1
 eval_mode="S"
 sh_file="run_SFRD.sh"
 
-data_path="/root/autodl-tmp/gitprojects/linear-gradient-matching/data/datasets/imagenet"
+data_path="${DATA_PATH:-../data/imagenet}"
 save_path="./results"
-buffer_path="/root/autodl-tmp/gitprojects/SFRD/buffers"
+buffer_path="${BUFFER_PATH:-./buffers}"
 
 seed=0
 FLAG=""
@@ -39,7 +39,7 @@ w0=40
 
 shared_mode="global"
 shared_num_layers=4
-shared_layer_size=128
+shared_layer_size=160
 modulation_type="shift"
 shift_init=0.0
 latent_std=0.01
