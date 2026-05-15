@@ -9,7 +9,7 @@ net="ConvNet3D"
 ipc=5
 sh_file="run_SFRD.sh"
 eval_mode="SS"
-data_path="/root/autodl-tmp/gitprojects/DDiF/DDiF/Video/distill_utils/data"
+data_path="${VIDEO_DATA_PATH:-../data/video}"
 save_path="./results"
 
 batch_syn=0
