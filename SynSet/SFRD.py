@@ -580,7 +580,7 @@ class Siren(nn.Module):
         return self.last_layer(x)
 
 
-class TranslationTranslationModulatedSirenLayer(nn.Module):
+class TranslationModulatedSirenLayer(nn.Module):
     def __init__(self, dim_in, dim_out, w0=30., c=6., is_first=False,
                  use_bias=True, activation=None):
         super().__init__()
